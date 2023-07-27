@@ -1,13 +1,13 @@
 board = [
-    [8, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 3, 6, 0, 0, 0, 0, 0],
-    [0, 7, 0, 0, 9, 0, 2, 0, 0],
-    [0, 5, 0, 0, 0, 7, 0, 0, 0],
-    [0, 0, 0, 0, 4, 5, 7, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0, 3, 0],
-    [0, 0, 1, 0, 0, 0, 0, 6, 8],
-    [0, 0, 8, 5, 0, 0, 0, 1, 0],
-    [0, 9, 0, 0, 0, 0, 4, 0, 0],
+    [6, 7, 4, 8, 3, 5, 9, 1, 2],
+    [0, 0, 8, 2, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 4, 6, 7, 8, 0],
+    [0, 6, 1, 3, 0, 0, 0, 0, 0],
+    [3, 0, 0, 7, 0, 0, 0, 2, 6],
+    [0, 8, 0, 5, 6, 0, 3, 0, 0],
+    [0, 0, 2, 0, 0, 8, 0, 9, 0],
+    [8, 9, 0, 0, 7, 0, 0, 0, 0],
+    [0, 0, 6, 0, 5, 2, 0, 7, 8],
 ]
 
 
@@ -40,10 +40,10 @@ def find_empty_spot(bo):
     Args:
         bo (INT): 2D list of ints
     """
-    for i in range(len(bo)):
-        for j in range(len(bo[0])):
-            if bo[i][j] == 0:
-                return i, j
+    for row in range(9):
+        for col in range(9):
+            if bo[row][col] == 0:
+                return row, col
     return None
 
 
@@ -78,7 +78,7 @@ def find_valid(bo, num, pos):
     return True
 
 
-def solve(bo):
+def solve_sudoku(bo):
     """solver function using backtracking
 
     Args:
@@ -87,14 +87,13 @@ def solve(bo):
     empty = find_empty_spot(bo) # finds an empty spot
     if not empty:
         return True # if thers's no empty spot we're done
-    else:
-        row, col = empty # otherwise we'll get a row, and col value
 
-    for i in range(1, 10): # the valid values are 1 to 9
-        if find_valid(bo, i, (row, col)): 
-            bo[row][col] = i # if there's a valid value for the position(row, col) then we place it there
+    row, col = empty # otherwise we'll get a row, and col value
+    for num in range(1, 10): # the valid values are 1 to 9
+        if find_valid(bo, num, (row, col)):
+            bo[row][col] = num # if there's a valid value for the position(row, col) then we place it there
 
-            if solve(bo):
+            if solve_sudoku(bo):
                 return True
 
             bo[row][col] = 0
@@ -102,8 +101,13 @@ def solve(bo):
     return False
 
 
+def is_sudoku_solvable(board):
+    return solve_sudoku(board)
+
 print_board(board)
-solve(board)
-print()
-print("Solved Board")
-print_board(board)
+if is_sudoku_solvable(board):
+    print()
+    print("Solved Board")
+    print_board(board)
+else:
+    print("This board is unsolvable")
