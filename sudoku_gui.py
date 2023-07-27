@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 
 sudoku_board = [
-    [6, 1, 4, 8, 3, 5, 9, 1, 2],
+    [6, 7, 4, 8, 3, 5, 9, 1, 2],
     [0, 0, 8, 2, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 4, 6, 7, 8, 0],
     [0, 6, 1, 3, 0, 0, 0, 0, 0],
@@ -82,6 +82,22 @@ def is_sudoku_solvable():
     return solve_sudoku()
 
 
+def reset_button_clicked():
+    global sudoku_board
+    sudoku_board = [
+        [6, 7, 4, 8, 3, 5, 9, 1, 2],
+        [0, 0, 8, 2, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 4, 6, 7, 8, 0],
+        [0, 6, 1, 3, 0, 0, 0, 0, 0],
+        [3, 0, 0, 7, 0, 0, 0, 2, 6],
+        [0, 8, 0, 5, 6, 0, 3, 0, 0],
+        [0, 0, 2, 0, 0, 8, 0, 9, 0],
+        [8, 9, 0, 0, 7, 0, 0, 0, 0],
+        [0, 0, 6, 0, 5, 2, 0, 7, 8],
+    ]
+    draw_sudoku_board(canvas)
+
+
 def solve_button_clicked():
     if is_sudoku_solvable():
         draw_sudoku_board(canvas)
@@ -112,6 +128,10 @@ canvas.pack()
 
 # Draw the Sudoku board
 draw_sudoku_board(canvas)
+
+# Create the Reset button
+reset_button = ttk.Button(root, text="Reset", command=reset_button_clicked, style="Custom.TButton")
+reset_button.pack()
 
 # Create the Solve button
 solve_button = ttk.Button(root, text="Solve", command=solve_button_clicked, style="Custom.TButton")
