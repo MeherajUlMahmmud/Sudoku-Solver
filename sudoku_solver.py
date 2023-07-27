@@ -30,7 +30,7 @@ def print_board(bo):
                 print(str(bo[i][j]) + " |")
             else:
                 print(str(bo[i][j]) + " ", end="")
-    
+
     print("- - - - - - - - - - - - -")
 
 
@@ -84,14 +84,14 @@ def solve_sudoku(bo):
     Args:
         bo (INT): 2D list of ints
     """
-    empty = find_empty_spot(bo) # finds an empty spot
+    empty = find_empty_spot(bo)  # finds an empty spot
     if not empty:
-        return True # if thers's no empty spot we're done
+        return True  # if thers's no empty spot we're done
 
-    row, col = empty # otherwise we'll get a row, and col value
-    for num in range(1, 10): # the valid values are 1 to 9
+    row, col = empty  # otherwise we'll get a row, and col value
+    for num in range(1, 10):  # the valid values are 1 to 9
         if find_valid(bo, num, (row, col)):
-            bo[row][col] = num # if there's a valid value for the position(row, col) then we place it there
+            bo[row][col] = num  # if there's a valid value for the position(row, col) then we place it there
 
             if solve_sudoku(bo):
                 return True
@@ -103,6 +103,7 @@ def solve_sudoku(bo):
 
 def is_sudoku_solvable(board):
     return solve_sudoku(board)
+
 
 print_board(board)
 if is_sudoku_solvable(board):
