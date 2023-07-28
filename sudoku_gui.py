@@ -21,8 +21,10 @@ def draw_sudoku_board(canvas):
             linewidth = 2
         else:
             linewidth = 1
-        canvas.create_line(i * cell_size, 0, i * cell_size, board_size, width=linewidth)
-        canvas.create_line(0, i * cell_size, board_size, i * cell_size, width=linewidth)
+        canvas.create_line(i * cell_size, 0, i * cell_size,
+                           board_size, width=linewidth)
+        canvas.create_line(0, i * cell_size, board_size,
+                           i * cell_size, width=linewidth)
 
     # Draw the numbers on the board
     for row in range(9):
@@ -106,8 +108,10 @@ def solve_button_clicked():
         window.title("Error")
         window.geometry("300x100")
         window.resizable(False, False)
-        tk.Label(window, text="The Sudoku board is not solvable.", font=('Arial', 14)).pack()
-        tk.Button(window, text="OK", command=window.destroy, font=('Arial', 14)).pack()
+        tk.Label(window, text="The Sudoku board is not solvable.",
+                 font=('Arial', 14)).pack()
+        tk.Button(window, text="OK", command=window.destroy,
+                  font=('Arial', 14)).pack()
 
         print("The Sudoku board is not solvable.")
 
@@ -130,11 +134,13 @@ canvas.pack()
 draw_sudoku_board(canvas)
 
 # Create the Reset button
-reset_button = ttk.Button(root, text="Reset", command=reset_button_clicked, style="Custom.TButton")
+reset_button = ttk.Button(
+    root, text="Reset", command=reset_button_clicked, style="Custom.TButton")
 reset_button.pack()
 
 # Create the Solve button
-solve_button = ttk.Button(root, text="Solve", command=solve_button_clicked, style="Custom.TButton")
+solve_button = ttk.Button(
+    root, text="Solve", command=solve_button_clicked, style="Custom.TButton")
 solve_button.pack()
 
 # Define a custom style for the button
@@ -151,8 +157,3 @@ style.configure(
 
 # Run the Tkinter main loop
 root.mainloop()
-# print_board(sudoku_board)
-# solve(sudoku_board)
-# print()
-# print("Solved Board")
-# print_board(sudoku_board)
